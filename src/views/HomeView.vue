@@ -1,15 +1,15 @@
 <template>
-  <div class="home">
-    <h1>This is an home page</h1>
-  </div>
+  <v-container>
+    <v-row><v-select label="Seleccióna" :items="['Aceituna', 'mandarina']"></v-select></v-row>
+    <v-row><analize-modal-component></analize-modal-component></v-row>
+    <v-row>
+      <v-col cols="7" style="padding-left: 0px"
+        >guardar los datospara mejorar calidad de resultados</v-col
+      >
+      <v-col cols="5" style="padding-right: 0"><v-switch label="guardar"></v-switch></v-col>
+    </v-row>
+  </v-container>
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<script setup lang="ts">
+import AnalizeModalComponent from '@/components/AnalizeModalComponent.vue'
+</script>

@@ -47,7 +47,7 @@
     </v-card>
   </div>
 </template>
-<script>
+<script lang="ts">
   export default {
     data: () => ({
       visible: false,
