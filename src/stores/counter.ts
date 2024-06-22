@@ -1,12 +1,15 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
+export const useImageStore = defineStore('image', () => {
+  const uploadedImage = ref<string | null>(null)
+
+  const setUploadedImage = (image: string | null) => {
+    uploadedImage.value = image
   }
 
-  return { count, doubleCount, increment }
+  return {
+    uploadedImage,
+    setUploadedImage
+  }
 })
