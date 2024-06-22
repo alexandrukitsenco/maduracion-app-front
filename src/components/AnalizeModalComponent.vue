@@ -7,7 +7,7 @@
     <template v-slot:default="{ isActive }">
       <v-card title="Analiza maduración">
         <v-container>
-          <v-row class="pa-2"
+          <v-row v-if="isMobile" class="pa-2"
             ><v-btn style="width: 100%" text="Haz una foto" @click="openCamara"></v-btn
             ><input
               ref="camaraImageInput"
@@ -33,11 +33,20 @@
   </v-dialog>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const isActive = ref(false)
 const galeriaImageInput = ref<HTMLInputElement | null>(null)
 const camaraImageInput = ref<HTMLInputElement | null>(null)
+const isMobile = ref(false)
+
+const detectDevice = () => {
+  const userAgent = navigator.userAgent
+  isMobile.value = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+    userAgent.toLowerCase()
+  )
+  console.log(isMobile.value, userAgent)
+}
 
 const openGallery = () => {
   if (galeriaImageInput.value) {
@@ -50,4 +59,8 @@ const openCamara = () => {
     camaraImageInput.value.click()
   }
 }
+
+onMounted(() => {
+  detectDevice()
+})
 </script>
