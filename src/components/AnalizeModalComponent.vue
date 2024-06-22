@@ -8,15 +8,19 @@
       <v-card title="Analiza maduración">
         <v-container>
           <v-row class="pa-2"
-            ><v-btn style="width: 100%" text="Haz una foto" @click="console.log('foto')"></v-btn
-          ></v-row>
+            ><v-btn style="width: 100%" text="Haz una foto" @click="openCamara"></v-btn
+            ><input
+              ref="camaraImageInput"
+              type="file"
+              accept="image/*"
+              capture="environment"
+              style="display: none"
+            />
+          </v-row>
           <v-row class="pa-2"
-            ><v-btn
-              style="width: 100%"
-              text="Escoge desde la galeria"
-              @click="console.log('galeria')"
-            ></v-btn
-          ></v-row>
+            ><v-btn style="width: 100%" text="Escoge desde la galeria" @click="openGallery"></v-btn
+            ><input ref="galeriaImageInput" type="file" accept="image/*" style="display: none"
+          /></v-row>
         </v-container>
 
         <v-card-actions>
@@ -30,5 +34,20 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const isActive = ref(false)
+const galeriaImageInput = ref<HTMLInputElement | null>(null)
+const camaraImageInput = ref<HTMLInputElement | null>(null)
+
+const openGallery = () => {
+  if (galeriaImageInput.value) {
+    galeriaImageInput.value.click()
+  }
+}
+
+const openCamara = () => {
+  if (camaraImageInput.value) {
+    camaraImageInput.value.click()
+  }
+}
 </script>
