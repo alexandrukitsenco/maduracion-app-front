@@ -7,7 +7,7 @@
           alt="Imagen subida"
           style="width: 100%; max-width: 400px"
         />
-        <v-card-text>La maduracion es de 80% </v-card-text>
+        <v-card-text>La maduracion es de {{ imageStore.prediction }}</v-card-text>
       </v-row>
     </v-container>
 
@@ -18,7 +18,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { useImageStore } from '@/stores/counter'
+import { useImageStore } from '@/stores/imageStore'
 import { defineEmits } from 'vue'
 
 const emit = defineEmits(['close'])
@@ -32,3 +32,4 @@ img {
   height: auto;
 }
 </style>
+@/stores/useImageStore

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, defineEmits } from 'vue'
-import { useImageStore } from '@/stores/counter'
+import { useImageStore } from '@/stores/imageStore'
 
 const emit = defineEmits(['image-uploaded'])
 const imageStore = useImageStore()
