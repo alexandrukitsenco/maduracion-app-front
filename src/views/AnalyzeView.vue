@@ -1,6 +1,8 @@
 <template>
-  <v-card title="Analiza maduración">
     <v-container>
+      <v-row>
+        <h2 style="color: white;">Analiza maduración</h2>
+      </v-row>
       <v-row v-if="isMobile" class="pa-2">
         <v-btn style="width: 100%" text="Haz una foto" @click="openCamara">Haz una foto</v-btn>
         <input
@@ -13,9 +15,7 @@
         />
       </v-row>
       <v-row class="pa-2">
-        <v-btn style="width: 100%" text="Escoge desde la galeria" @click="openGallery"
-          >Escoge desde la galeria</v-btn
-        >
+        <v-btn style="width: 100%" text="Escoge desde la galeria" @click="openGallery">Escoge desde la galeria</v-btn>
         <input
           ref="galeriaImageInput"
           type="file"
@@ -25,14 +25,14 @@
         />
       </v-row>
     </v-container>
-  </v-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, defineEmits } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useImageStore } from '@/stores/imageStore'
 
-const emit = defineEmits(['image-uploaded'])
+const router = useRouter()
 const imageStore = useImageStore()
 
 const galeriaImageInput = ref<HTMLInputElement | null>(null)
@@ -65,7 +65,7 @@ const handleImageUpload = (event: Event) => {
     const reader = new FileReader()
     reader.onload = (e) => {
       imageStore.setUploadedImage(e.target?.result as string)
-      emit('image-uploaded')
+      router.push({ name: 'result' })
     }
     reader.readAsDataURL(file)
   }

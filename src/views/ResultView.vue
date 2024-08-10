@@ -1,0 +1,19 @@
+<template>
+  <v-container >
+        <v-row><p>Resultado del análisis de maduración {{ imageStore.prediction }}</p></v-row>
+        <v-row><img style="width: 100%;" v-if="imageStore.uploadedImage" :src="imageStore.uploadedImage" alt="Imagen analizada" /></v-row>
+        <v-row><v-btn @click="goBack" color="primary">Volver</v-btn></v-row>        
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useImageStore } from '@/stores/imageStore'
+
+const router = useRouter()
+const imageStore = useImageStore()
+
+const goBack = () => {
+  router.push({ name: 'home' })
+}
+</script>
