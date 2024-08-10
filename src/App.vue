@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { usePredictionStore } from '@/stores/predictionStore'
-import type { Option } from '@models/predictionModels'
+import type { Option } from '@/models/predictionModels'
 import { onMounted } from 'vue'
 
 const { addOption } = usePredictionStore()
