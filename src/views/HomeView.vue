@@ -31,14 +31,7 @@ const predictionStore = usePredictionStore()
 const selectedOption = ref<string | null>(null)
 
 onMounted(() => {
-  if (predictionStore.selectedOption) {
-    // Si ya hay una opción seleccionada en el store, úsala
-    selectedOption.value = predictionStore.selectedOption
-  } else if (predictionStore.options.length > 0) {
-    // Si no hay opción seleccionada pero hay opciones disponibles, selecciona la primera
-    selectedOption.value = predictionStore.options[0]
-    predictionStore.setSelectedOption(selectedOption.value)
-  }
+  predictionStore.setSelectedOption(null)
 })
 
 watch(selectedOption, (newValue) => {

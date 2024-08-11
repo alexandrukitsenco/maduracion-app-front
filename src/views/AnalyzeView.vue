@@ -64,6 +64,7 @@ const handleImageUpload = (event: Event) => {
     const file = input.files[0]
     const reader = new FileReader()
     reader.onload = (e) => {
+      imageStore.setUploadedImage(null)
       imageStore.setUploadedImage(e.target?.result as string)
       router.push({ name: 'result' })
     }

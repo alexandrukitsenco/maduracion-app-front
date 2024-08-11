@@ -14,12 +14,26 @@ const router = createRouter({
     {
       path: '/analyze',
       name: 'analyze',
-      component: AnalyzeView
+      component: AnalyzeView,
+      beforeEnter: (to, from, next) => {
+        if (from.name === 'home') {
+          next()
+        } else {
+          next({ name: 'home' })
+        }
+      }
     },
     {
       path: '/result',
       name: 'result',
-      component: ResultView
+      component: ResultView,
+      beforeEnter: (to, from, next) => {
+        if (from.name === 'analyze') {
+          next()
+        } else {
+          next({ name: 'home' })
+        }
+      }
     }
   ]
 })
