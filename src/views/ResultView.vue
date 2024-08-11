@@ -1,8 +1,8 @@
 <template>
-  <v-container >
+  <v-container style="display: flex; flex-direction: column; gap: 20px;">
         <v-row><p>Resultado del análisis de maduración {{ imageStore.prediction }}</p></v-row>
         <v-row><img style="width: 100%;" v-if="imageStore.uploadedImage" :src="imageStore.uploadedImage" alt="Imagen analizada" /></v-row>
-        <v-row><v-btn @click="goBack" color="primary">Volver</v-btn></v-row>        
+        <v-row><v-btn @click="goBack" color="primary" style="width: 100%">Volver</v-btn></v-row>        
   </v-container>
 </template>
 

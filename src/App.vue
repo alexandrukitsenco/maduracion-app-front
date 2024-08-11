@@ -87,7 +87,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main style="min-height: 100vh; display: flex">
+  <main style="min-height: 100vh; display: flex; max-width: 500px; margin: auto;">
     <v-container class="mt-12" style="height: 100%">
       <RouterView />
     </v-container>
