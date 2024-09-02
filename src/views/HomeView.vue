@@ -35,7 +35,6 @@ onMounted(() => {
 })
 
 watch(selectedOption, (newValue) => {
-  console.log('La opción seleccionada ha cambiado:', newValue)
   predictionStore.setSelectedOption(newValue)
 })
 

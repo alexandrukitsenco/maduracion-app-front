@@ -12,9 +12,19 @@ export const useImageStore = defineStore('image', () => {
   const setUploadedImage = async (image: string | null) => {
     uploadedImage.value = image
     if (image) {
-      const hist = await calcularHistogramas(image)
-      histogramas.value = hist
-      prediction.value = calcularPrediccion(hist, predictionStore.selectedOption.regresion, predictionStore.selectedOption.b0)
+      try {
+        await new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = image;
+        });
+        const hist = await calcularHistogramas(image)
+        histogramas.value = hist
+        prediction.value = calcularPrediccion(hist, predictionStore.selectedOption.regresion, predictionStore.selectedOption.b0)
+      } catch (error) {
+        console.error('Error al cargar o procesar la imagen:', error);
+      }
     } else {
       histogramas.value = null
       prediction.value = null
@@ -33,39 +43,41 @@ export const useImageStore = defineStore('image', () => {
         canvas.width = img.width
         canvas.height = img.height
         ctx.drawImage(img, 0, 0)
-
+  
         const imageData = ctx.getImageData(0, 0, img.width, img.height)
         const data = imageData.data
-
+  
         const histogramas = {
           R: new Array(64).fill(0),
           G: new Array(64).fill(0),
           B: new Array(64).fill(0)
         }
-
+  
         for (let i = 0; i < data.length; i += 4) {
           const r = data[i]
           const g = data[i + 1]
           const b = data[i + 2]
 
-          // Asegúrate de que el índice esté en el rango adecuado
+  
           histogramas.R[Math.floor(r / 4)]++
           histogramas.G[Math.floor(g / 4)]++
           histogramas.B[Math.floor(b / 4)]++
         }
-
-        // Concatenar los histogramas y resolver la promesa
-        resolve([...histogramas.R, ...histogramas.G, ...histogramas.B])
+  
+        const resultado = [...histogramas.R, ...histogramas.G, ...histogramas.B];
+        resolve(resultado)
       }
-
+  
       img.onerror = (error) => {
+        console.error('Error al cargar la imagen:', error);
         reject(new Error('Error al cargar la imagen: ' + error))
       }
     })
   }
 
   const calcularPrediccion = (histograma: number[], regresion: number[], b0: number): number => {
-    return add(sum(dotMultiply(histograma, regresion)), b0)
+    const resultado = add(sum(dotMultiply(histograma, regresion)), b0);
+    return resultado;
   }
 
   return {
